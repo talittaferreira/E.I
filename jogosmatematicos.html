@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <form action="jogos.html"></form>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Jogos Matemáticos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: hsl(283, 89%, 43%);
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #fff 3px solid;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .main-content {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .game {
+            background:  hsl(283, 89%, 43%);
+            padding: 20px;
+            border-radius: 5px;
+            color: white;
+            box-shadow: 0 0 10px  rgb(255, 255, 255);
+            width: 30%;
+        }
+        .game h2 {
+            text-align: center;
+        }
+        .nav {
+            display: flex;
+            justify-content: center;
+            background-color: #ffffff;
+            padding: 10px;
+        }
+        .game button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .game-content {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Página de Jogos Matemáticos</h1>
+        </div>
+    </header>
+<div>
+    <div class="nav">
+        <a href="jogos.html">Página anterior</a>
+    </div>
+
+</div>
+    <div class="container">
+        <div class="main-content">
+            <div class="game" id="calculo">
+                <h2>Jogo de Cálculo</h2>
+                <button onclick="startGame('calculo')">Iniciar Jogo</button>
+                <div class="game-content" id="calculo-content">
+                    <!-- Jogo de Cálculo aqui -->
+                </div>
+            </div>
+            <div class="game" id="calculadora">
+                <h2>Calculadora Quebrada</h2>
+                <button onclick="startGame('calculadora')">Iniciar Jogo</button>
+                <div class="game-content" id="calculadora-content">
+                    <!-- Calculadora Quebrada aqui -->
+                </div>
+            </div>
+            <div class="game" id="aritmetica">
+                <h2>Aritmética</h2>
+                <button onclick="startGame('aritmetica')">Iniciar Jogo</button>
+                <div class="game-content" id="aritmetica-content">
+                    <!-- Jogo de Aritmética aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startGame(gameId) {
+            // Esconde todos os conteúdos de jogos
+            document.querySelectorAll('.game-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            // Mostra o conteúdo do jogo selecionado
+            document.getElementById(gameId + '-content').style.display = 'block';
+
+            // Adiciona conteúdo de jogo específico
+            const gameContent = document.getElementById(gameId + '-content');
+
+            switch (gameId) {
+                case 'calculo':
+                    gameContent.innerHTML = `
+                        <h3>Jogo de Cálculo</h3>
+                        <p>Resolva as equações abaixo:</p>
+                        <form id="calculo-form">
+                            <label>Qual é 5 + 7?</label><br>
+                            <input type="text" id="calculo-answer1"><br><br>
+                            <label>Qual é 12 - 4?</label><br>
+                            <input type="text" id="calculo-answer2"><br><br>
+                            <button type="button" onclick="checkCalculo()">Verificar Respostas</button>
+                        </form>
+                        <div id="calculo-result"></div>
+                    `;
+                    break;
+                case 'calculadora':
+                    gameContent.innerHTML = `
+                        <h3>Calculadora Quebrada</h3>
+                        <p>Digite um número e veja o resultado da operação quebrada.</p>
+                        <form id="calculadora-form">
+                            <input type="text" id="calculadora-input" placeholder="Digite um número"><br><br>
+                            <button type="button" onclick="brokenCalculator()">Calcular</button>
+                        </form>
+                        <div id="calculadora-result"></div>
+                    `;
+                    break;
+                case 'aritmetica':
+                    gameContent.innerHTML = `
+                        <h3>Jogo de Aritmética</h3>
+                        <p>Resolva a seguinte operação:</p>
+                        <p>Qual é 6 * 8?</p>
+                        <input type="text" id="aritmetica-answer"><br><br>
+                        <button type="button" onclick="checkAritmetica()">Verificar Resposta</button>
+                        <div id="aritmetica-result"></div>
+                    `;
+                    break;
+                default:
+                    gameContent.innerHTML = '<p>Jogo não encontrado.</p>';
+            }
+        }
+
+        function checkCalculo() {
+            const answer1 = document.getElementById('calculo-answer1').value;
+            const answer2 = document.getElementById('calculo-answer2').value;
+            let result = '';
+
+            if (answer1 == '12' && answer2 == '8') {
+                result = 'Parabéns! Você acertou todas as respostas.';
+            } else {
+                result = 'Algumas respostas estão erradas. Tente novamente!';
+            }
+
+            document.getElementById('calculo-result').innerText = result;
+        }
+
+        function brokenCalculator() {
+            const input = document.getElementById('calculadora-input').value;
+            let result = '';
+
+            if (!isNaN(input)) {
+                result = `A calculadora quebrada diz: ${input} é um número válido, mas o resultado não é confiável.`;
+            } else {
+                result = 'Por favor, digite um número válido.';
+            }
+
+            document.getElementById('calculadora-result').innerText = result;
+        }
+
+        function checkAritmetica() {
+            const answer = document.getElementById('aritmetica-answer').value;
+            let result = '';
+
+            if (answer == '48') {
+                result = 'Correto! 6 * 8 é 48.';
+            } else {
+                result = 'Resposta errada. Tente novamente!';
+            }
+
+            document.getElementById('aritmetica-result').innerText = result;
+        }
+    </script>
+</body>
+</html>

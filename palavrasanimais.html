@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caça-Palavras: Animais</title>
+    <style>
+        body {
+            background-color: #6a0dad; /* Roxo */
+            color: #000000;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        .caça-palavras {
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(10, 30px);
+            grid-gap: 2px;
+            background-color: #fff; /* Branco */
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .caça-palavras div {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .caça-palavras .selected {
+            background-color: rgb(255, 252, 252);
+            
+        }
+        .caça-palavras .correct {
+            background-color: rgb(252, 4, 4);
+        }
+        .caça-palavras .incorrect {
+            background-color: lightgreen;
+        }
+        .caça-palavras .disabled {
+            pointer-events: none;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+    <h1>Caça-Palavras: Animais</h1>
+    
+    <a  href="palavrascruzadas.html">Página anterior</a> 
+    <div class="caça-palavras" id="caça-palavras">
+        <!-- Letras do caça-palavras serão inseridas aqui pelo JavaScript -->
+    </div>
+    <script>
+        const palavras = [
+            'GATO', 'CÃO', 'CAVALO', 'PATO', 'PEIXE'
+        ];
+        const grid = [
+            'G', 'A', 'T', 'O', 'L', 'T', 'P', 'E', 'X', 'R',
+            'E', 'L', 'A', 'D', 'O', 'P', 'T', 'A', 'X', 'Y',
+            'C', 'A', 'V', 'A', 'L', 'O', 'C', 'A', 'C', 'T',
+            'A', 'C', 'E', 'G', 'S', 'I', 'S', 'E', 'P', 'E',
+            'M', 'A', 'A', 'T', 'I', 'L', 'I', 'A', 'G', 'A',
+            'A', 'A', 'X', 'P', 'O', 'O', 'O', 'X', 'E', 'I',
+            'X', 'E', 'O', 'X', 'S', 'O', 'T', 'O', 'P', 'E',
+            'T', 'O', 'I', 'X', 'E', 'X', 'X', 'O', 'X', 'Y',
+            'Y', 'C', 'L', 'O', 'A', 'A', 'V', 'E', 'X', 'T',
+            'O', 'X', 'O', 'O', 'T', 'S', 'E', 'E', 'E', 'C'
+        ];
+        const gridSize = 10; // Tamanho da grid
+
+        const palavrasEncontradas = [];
+
+        function renderizarGrid() {
+            const container = document.getElementById('caça-palavras');
+            container.innerHTML = '';
+            for (let i = 0; i < grid.length; i++) {
+                const cell = document.createElement('div');
+                cell.textContent = grid[i];
+                cell.dataset.index = i;
+                cell.addEventListener('click', selecionarLetra);
+                container.appendChild(cell);
+            }
+        }
+
+        function selecionarLetra(event) {
+            const cell = event.target;
+            if (cell.classList.contains('disabled')) return;
+
+            cell.classList.add('selected');
+            const selecionados = Array.from(document.querySelectorAll('.caça-palavras .selected'));
+            const indicesSelecionados = selecionados.map(c => parseInt(c.dataset.index));
+            const palavraSelecionada = indicesSelecionados.map(i => grid[i]).join('');
+
+            if (palavras.includes(palavraSelecionada)) {
+                selecionados.forEach(c => c.classList.add('correct'));
+                selecionados.forEach(c => c.classList.remove('selected'));
+                selecionados.forEach(c=> c.classList.remove('incorrect'));
+                palavrasEncontradas.push(palavraSelecionada);
+                if (palavrasEncontradas.length === palavras.length) {
+                    alert('Parabéns! Você encontrou todas as palavras!');
+                }
+            } else {
+                selecionados.forEach(c => c.classList.add('incorrect'));
+                selecionados.forEach(c => c.classList.add('disabled'));
+                selecionados.forEach(c => c.classList.remove('selected'));
+            }
+        }
+
+        renderizarGrid();
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educação e Igualdade para Idosos</title>
+</head>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #4CAF50;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .gallery img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .intro {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .intro h1 {
+            color: #4CAF50;
+        }
+        .intro p {
+            font-size: 1.2em;
+        }
+        footer {
+            background: #4CAF50;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+<body>
+   
+    
+    <div class="container">
+        <div class="intro">
+            <h1>Bem-vindo ao Nosso Aplicativo!</h1>
+            <p>Nosso aplicativo é dedicado a promover a educação e a igualdade entre idosos, oferecendo recursos recreativos e educativos para uma vida mais ativa e engajada.</p>
+        </div>
+        
+        <div class="gallery">
+            <img src="foto1.jpg" alt="Atividade Recreativa 1">
+            <img src="foto2.jpg" alt="Atividade Recreativa 2">
+            <img src="foto3.jpg" alt="Atividade Recreativa 3">
+            <img src="foto4.jpg" alt="Atividade Recreativa 4">
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 Educação e Igualdade para Idosos. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de História</title>
+    <style>
+        body {
+            background-color: #6a0dad; /* Cor roxa de fundo */
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: #fff;
+            color: #000;
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #6a0dad;
+        }
+        .question {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 10px 0;
+        }
+        .options button {
+            background-color: #6a0dad;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .options button:hover {
+            background-color: #5a0b9f;
+        }
+        .message {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz de História</h1>
+        <div id="quiz">
+            <!-- Pergunta 1 -->
+            <div id="question-1" class="question">
+                <p>Qual é a capital da França?</p>
+                <ul class="options">
+                    <li><button onclick="checkAnswer(1, 'a')">Paris</button></li>
+                    <li><button onclick="checkAnswer(1, 'b')">Londres</button></li>
+                    <li><button onclick="checkAnswer(1, 'c')">Berlim</button></li>
+                    <li><button onclick="checkAnswer(1, 'd')">Madri</button></li>
+                </ul>
+            </div>
+
+            <!-- Pergunta 2 -->
+            <div id="question-2" class="question" style="display: none;">
+                <p>Quem foi o primeiro imperador romano?</p>
+                <ul class="options">
+                    <li><button onclick="checkAnswer(2, 'a')">Augusto</button></li>
+                    <li><button onclick="checkAnswer(2, 'b')">Nero</button></li>
+                    <li><button onclick="checkAnswer(2, 'c')">Júlio César</button></li>
+                    <li><button onclick="checkAnswer(2, 'd')">Trajano</button></li>
+                </ul>
+            </div>
+
+            <!-- Pergunta 3 -->
+            <div id="question-3" class="question" style="display: none;">
+                <p>Em que ano começou a Revolução Francesa?</p>
+                <ul class="options">
+                    <li><button onclick="checkAnswer(3, 'a')">1789</button></li>
+                    <li><button onclick="checkAnswer(3, 'b')">1776</button></li>
+                    <li><button onclick="checkAnswer(3, 'c')">1804</button></li>
+                    <li><button onclick="checkAnswer(3, 'd')">1815</button></li>
+                </ul>
+            </div>
+
+            <!-- Pergunta 4 -->
+            <div id="question-4" class="question" style="display: none;">
+                <p>Quem descobriu a América?</p>
+                <ul class="options">
+                    <li><button onclick="checkAnswer(4, 'a')">Cristóvão Colombo</button></li>
+                    <li><button onclick="checkAnswer(4, 'b')">Vasco da Gama</button></li>
+                    <li><button onclick="checkAnswer(4, 'c')">Ferdinando de Magalhães</button></li>
+                    <li><button onclick="checkAnswer(4, 'd')">Hernán Cortés</button></li>
+                </ul>
+            </div>
+
+            <!-- Feedback -->
+            <div id="feedback" class="message"></div>
+        </div>
+    </div>
+
+    <script>
+        // Respostas corretas para cada pergunta
+        const correctAnswers = {
+            1: 'a',  // Resposta correta para a pergunta 1
+            2: 'a',  // Resposta correta para a pergunta 2
+            3: 'a',  // Resposta correta para a pergunta 3
+            4: 'a'   // Resposta correta para a pergunta 4
+        };
+
+        function checkAnswer(questionNumber, answer) {
+            const feedback = document.getElementById('feedback');
+            const correctAnswer = correctAnswers[questionNumber];
+            
+            if (answer === correctAnswer) {
+                feedback.textContent = 'Parabéns! Você acertou!';
+                feedback.style.color = 'green';
+                setTimeout(() => showNextQuestion(questionNumber), 1000);
+            } else {
+                feedback.textContent = 'Resposta errada. Tente novamente!';
+                feedback.style.color = 'red';
+            }
+        }
+
+        function showNextQuestion(currentQuestion) {
+            const nextQuestion = currentQuestion + 1;
+            const currentQuestionElement = document.getElementById(`question-${currentQuestion}`);
+            const nextQuestionElement = document.getElementById(`question-${nextQuestion}`);
+
+            if (nextQuestionElement) {
+                currentQuestionElement.style.display = 'none';
+                nextQuestionElement.style.display = 'block';
+            } else {
+                feedback.textContent = 'Parabéns! Você completou o quiz!';
+                feedback.style.color = 'blue';
+            }
+        }
+    </script>
+</body>
+</html>
